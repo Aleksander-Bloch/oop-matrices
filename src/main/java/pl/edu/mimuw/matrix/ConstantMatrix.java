@@ -64,6 +64,8 @@ public class ConstantMatrix extends DoubleMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("CONSTANT ").append(constant).append("-MATRIX\n");
+        sb.append(shape);
         if (shape.columns >= 3) {
             sb.append((constant + " ... " + constant + " \n").repeat(shape.rows));
         } else {

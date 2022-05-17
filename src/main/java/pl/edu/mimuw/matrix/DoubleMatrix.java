@@ -1,17 +1,17 @@
 package pl.edu.mimuw.matrix;
 
-import pl.edu.mimuw.operation.Multiply;
-import pl.edu.mimuw.operation.Operation;
-import pl.edu.mimuw.operation.Add;
-import pl.edu.mimuw.operation.Subtract;
+import pl.edu.mimuw.operation.*;
 
 public abstract class DoubleMatrix implements IDoubleMatrix {
+    // Every matrix will have its dimensions as attribute.
     protected final Shape shape;
 
     protected DoubleMatrix(Shape shape) {
         this.shape = shape;
     }
 
+    // Helper function for all scalar operations.
+    // Used to prevent possible duplicates.
     private IDoubleMatrix scalarDataOperation(Operation operation, double scalar) {
         double[][] data = this.data();
         double[][] resultData = new double[shape.rows][shape.columns];
@@ -25,6 +25,8 @@ public abstract class DoubleMatrix implements IDoubleMatrix {
         return new FullMatrix(resultData, shape);
     }
 
+    // Helper function for matrix operations: times, plus, minus.
+    // Used to prevent possible duplicates.
     private IDoubleMatrix matrixOperation(Operation operation, IDoubleMatrix other) {
         assert shape.equals(other.shape());
         double[][] data = this.data();
@@ -40,6 +42,7 @@ public abstract class DoubleMatrix implements IDoubleMatrix {
         return new FullMatrix(resultData, shape);
     }
 
+    // Standard O(n^3) matrix multiplication algorithm.
     @Override
     public IDoubleMatrix times(IDoubleMatrix other) {
         Shape otherShape = other.shape();

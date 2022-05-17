@@ -63,8 +63,18 @@ public class ColumnMatrix extends LineMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (double ColValue : line) {
-            sb.append((ColValue + " ").repeat(shape.columns));
+        sb.append("COLUMN MATRIX\n");
+        sb.append(shape);
+        if (shape.columns >= 3) {
+            for (double ColValue : line) {
+                sb.append(ColValue).append(" ... ").append(ColValue);
+                sb.append("\n");
+            }
+        } else {
+            for (double ColValue : line) {
+                sb.append((ColValue + " ").repeat(shape.columns));
+                sb.append("\n");
+            }
         }
         return sb.toString();
     }

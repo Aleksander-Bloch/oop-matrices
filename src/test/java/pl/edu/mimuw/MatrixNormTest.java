@@ -77,6 +77,33 @@ public class MatrixNormTest {
         FROBENIUS_NORM
       );
     }
+
+    @Test
+    void testConstant() {
+      testMatrixNorm(
+        constant(matrix(3, 2), -7),
+        IDoubleMatrix::frobeniusNorm,
+        Math.sqrt(3 * 2 * -7 * -7)
+      );
+    }
+
+    @Test
+    void testRow() {
+      testMatrixNorm(
+        row(2, 1, 2, -3),
+        IDoubleMatrix::frobeniusNorm,
+        Math.sqrt(2 * (1 * 1 + 2 * 2 + -3 * -3))
+      );
+    }
+
+    @Test
+    void testColumn() {
+      testMatrixNorm(
+        column(3, 2, -3, -9),
+        IDoubleMatrix::frobeniusNorm,
+        Math.sqrt(3 * (2 * 2 + 3 * 3 + -9 * -9))
+      );
+    }
   }
 
   @Nested
@@ -138,6 +165,33 @@ public class MatrixNormTest {
         6
       );
     }
+
+    @Test
+    void testConstant() {
+      testMatrixNorm(
+        constant(matrix(3, 2), -3),
+        IDoubleMatrix::normOne,
+        3 * Math.abs(-3)
+      );
+    }
+
+    @Test
+    void testRow() {
+      testMatrixNorm(
+        row(2, -1, -2),
+        IDoubleMatrix::normOne,
+        4
+      );
+    }
+
+    @Test
+    void testColumn() {
+      testMatrixNorm(
+        column(2, -1, -2),
+        IDoubleMatrix::normOne,
+        3
+      );
+    }
   }
 
   @Nested
@@ -197,6 +251,33 @@ public class MatrixNormTest {
         antiDiagonal(1, -2, 3, -4, 5, -6),
         IDoubleMatrix::normInfinity,
         6
+      );
+    }
+
+    @Test
+    void testConstant() {
+      testMatrixNorm(
+        constant(matrix(2, 3), -5),
+        IDoubleMatrix::normInfinity,
+        15
+      );
+    }
+
+    @Test
+    void testRow() {
+      testMatrixNorm(
+        row(4, -9, 8),
+        IDoubleMatrix::normInfinity,
+        17
+      );
+    }
+
+    @Test
+    void testColumn() {
+      testMatrixNorm(
+        column(4, -1, -3, 5),
+        IDoubleMatrix::normInfinity,
+        20
       );
     }
   }

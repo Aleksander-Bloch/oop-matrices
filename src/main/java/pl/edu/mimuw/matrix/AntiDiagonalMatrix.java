@@ -4,6 +4,7 @@ import pl.edu.mimuw.operation.Multiply;
 
 public class AntiDiagonalMatrix extends SkewedMatrix {
 
+    // line[i] corresponds to data[shape.rows - 1 - i][i]
     protected AntiDiagonalMatrix(Shape shape, double[] line) {
         super(shape, line);
     }
@@ -34,6 +35,8 @@ public class AntiDiagonalMatrix extends SkewedMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("SQUARE ANTI-DIAGONAL MATRIX\n");
+        sb.append(shape);
         for (int i = shape.rows - 1; i >= 0; i--) {
             if (i >= 3) {
                 sb.append("0 ... 0 ");
@@ -45,7 +48,7 @@ public class AntiDiagonalMatrix extends SkewedMatrix {
                 if (shape.rows - 1 - i >= 3) {
                     sb.append("0 ... 0 ");
                 } else {
-                    sb.append("0 ".repeat(i));
+                    sb.append("0 ".repeat(shape.rows - 1 - i));
                 }
             }
             sb.append("\n");

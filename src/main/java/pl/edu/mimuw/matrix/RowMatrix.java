@@ -63,6 +63,8 @@ public class RowMatrix extends LineMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("ROW MATRIX\n");
+        sb.append(shape);
         for (int i = 0; i < shape.rows; i++) {
             for (double rowValue : line) {
                 sb.append(rowValue).append(" ");

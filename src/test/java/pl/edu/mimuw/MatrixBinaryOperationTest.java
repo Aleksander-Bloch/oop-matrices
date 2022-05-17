@@ -9,7 +9,7 @@ import pl.edu.mimuw.matrix.IDoubleMatrix;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static pl.edu.mimuw.TestMatrixData.TEST_PRECISION;
 import static pl.edu.mimuw.TestMatrixData.assertArrayEqualsWithTestPrecision;
-import static pl.edu.mimuw.matrix.DoubleMatrixFactory.zero;
+import static pl.edu.mimuw.matrix.DoubleMatrixFactory.*;
 import static pl.edu.mimuw.matrix.MatrixCellValue.cell;
 import static pl.edu.mimuw.matrix.Shape.matrix;
 
@@ -180,5 +180,42 @@ public class MatrixBinaryOperationTest {
     final var expectedResult = m.data();
     assertArrayEqualsWithTestPrecision(expectedResult, z.plus(m).data());
     assertArrayEqualsWithTestPrecision(expectedResult, m.plus(z).data());
+  }
+
+  @Test
+  void TestTimesConstantMatrices() {
+    final var c1 = constant(matrix(3, 2), 5);
+    final var c2 = constant(matrix(2, 1), -1);
+    final var result = c1.times(c2).data();
+    final var expectedResult = new double[][]{
+      new double[]{-10},
+      new double[]{-10},
+      new double[]{-10},
+    };
+    assertArrayEqualsWithTestPrecision(expectedResult, result);
+  }
+
+  @Test
+  void TestTimesScalarRowMatrices() {
+    final var r = row(3, 1, -1, 9);
+    final var result = r.times(-1).data();
+    final var expectedResult = new double[][]{
+      new double[]{-1, 1, -9},
+      new double[]{-1, 1, -9},
+      new double[]{-1, 1, -9},
+    };
+    assertArrayEqualsWithTestPrecision(expectedResult, result);
+  }
+
+  @Test
+  void TestTimesScalarColumnMatrices() {
+    final var col = column(2, 1, 0, 2);
+    final var result = col.times(10).data();
+    final var expectedResult = new double[][]{
+      new double[]{10, 10},
+      new double[]{0, 0},
+      new double[]{20, 20},
+    };
+    assertArrayEqualsWithTestPrecision(expectedResult, result);
   }
 }

@@ -1,7 +1,5 @@
 package pl.edu.mimuw.matrix;
 
-import pl.edu.mimuw.operation.Multiply;
-
 public class FullMatrix extends DoubleMatrix {
     private final double[][] data;
 
@@ -21,9 +19,9 @@ public class FullMatrix extends DoubleMatrix {
         return data;
     }
 
+    // Calculates maximum absolute column sum of the matrix.
     @Override
     public double normOne() {
-        // calculates maximum absolute column sum of the matrix
         double[][] data = this.data();
         double maxAbsColSum = 0.0;
 
@@ -38,9 +36,9 @@ public class FullMatrix extends DoubleMatrix {
         return maxAbsColSum;
     }
 
+    // Calculates maximum absolute row sum of the matrix.
     @Override
     public double normInfinity() {
-        // calculates maximum absolute row sum of the matrix
         double maxAbsRowSum = 0.0;
 
         for (int i = 0; i < shape.rows; i++) {
@@ -54,9 +52,9 @@ public class FullMatrix extends DoubleMatrix {
         return maxAbsRowSum;
     }
 
+    // Square root of sum of squares of all elements in the matrix.
     @Override
     public double frobeniusNorm() {
-        // square root of sum of squares of all elements in the matrix
         double sumOfSquares = 0.0;
 
         for (int i = 0; i < shape.rows; i++) {
@@ -71,6 +69,8 @@ public class FullMatrix extends DoubleMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("FULL MATRIX\n");
+        sb.append(shape);
         for (int i = 0; i < shape.rows; i++) {
             for (int j = 0; j < shape.columns; j++) {
                 sb.append(data[i][j]).append(" ");

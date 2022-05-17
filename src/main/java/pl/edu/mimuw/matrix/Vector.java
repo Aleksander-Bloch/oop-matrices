@@ -2,6 +2,7 @@ package pl.edu.mimuw.matrix;
 
 public class Vector extends ColumnMatrix {
 
+    // Using column representation of vector.
     protected Vector(Shape shape, double[] line) {
         super(shape, line);
     }
@@ -22,5 +23,16 @@ public class Vector extends ColumnMatrix {
             maxAbsValue = Math.max(maxAbsValue, Math.abs(value));
         }
         return maxAbsValue;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("COLUMN VECTOR\n");
+        sb.append(shape);
+        for (double value : line) {
+            sb.append(value).append("\n");
+        }
+        return sb.toString();
     }
 }

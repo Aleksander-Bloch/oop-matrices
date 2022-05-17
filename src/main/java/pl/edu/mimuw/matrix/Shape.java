@@ -44,4 +44,10 @@ public final class Shape {
   void assertValidTimes(Shape s) {
     assert columns == s.rows;
   }
+
+  @Override
+  public String toString() {
+    return "Dimensions[ROWS X COLUMNS]: " +
+            rows + " X " + columns + "\n";
+  }
 }

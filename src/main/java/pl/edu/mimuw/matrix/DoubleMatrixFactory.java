@@ -56,4 +56,20 @@ public class DoubleMatrixFactory {
   public static IDoubleMatrix zero(Shape shape) {
     return new ZeroMatrix(shape);
   }
+
+  public static IDoubleMatrix constant(Shape shape, double value) {
+    return new ConstantMatrix(value, shape);
+  }
+
+  public static IDoubleMatrix row(int rows, double... rowValues) {
+    assert rows > 0;
+    assert rowValues.length > 0;
+    return new RowMatrix(Shape.matrix(rows, rowValues.length), rowValues);
+  }
+
+  public static IDoubleMatrix column(int columns, double... columnValues) {
+    assert columns > 0;
+    assert columnValues.length > 0;
+    return new ColumnMatrix(Shape.matrix(columnValues.length, columns), columnValues);
+  }
 }

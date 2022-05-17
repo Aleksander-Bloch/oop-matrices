@@ -1,7 +1,7 @@
 package pl.edu.mimuw.matrix;
 
 public abstract class SkewedMatrix extends LineMatrix {
-
+    // Abstract representation of matrices that have diagonal/anti-diagonal.
     protected SkewedMatrix(Shape shape, double[] line) {
         super(shape, line);
     }

@@ -1,22 +1,22 @@
 package pl.edu.mimuw.matrix;
 
-import pl.edu.mimuw.operation.Add;
-import pl.edu.mimuw.operation.Multiply;
-import pl.edu.mimuw.operation.Operation;
-import pl.edu.mimuw.operation.Subtract;
-
+import pl.edu.mimuw.operation.*;
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class SparseMatrix extends DoubleMatrix {
-    private final List<MatrixCellValue> cells; // sorted by row first
+    // It will be stored as a list of row, column, value triples.
+    // The triples will be sorted by row first.
+    private final List<MatrixCellValue> cells;
 
     protected SparseMatrix(Shape shape, List<MatrixCellValue> cells) {
         super(shape);
         this.cells = cells;
     }
 
+    // Uses copy of list sorted by column first.
+    // Sets row from the first list and column from copy to create value for result cell.
+    // Finds dot product of the cells with the same value of column (first list) and row (copy).
     @Override
     public IDoubleMatrix times(IDoubleMatrix other) {
         Shape otherShape = other.shape();
@@ -28,6 +28,7 @@ public class SparseMatrix extends DoubleMatrix {
             Shape resultShape = Shape.matrix(shape.rows, otherShape.columns);
             List<MatrixCellValue> resultCells = new ArrayList<>();
 
+            // Letter A will refer to this matrix and B to other matrix.
             int indexA, indexB;
             for (indexA = 0; indexA < cells.size();) {
                 int row = cells.get(indexA).row;
@@ -40,11 +41,13 @@ public class SparseMatrix extends DoubleMatrix {
                         resultCells.add(MatrixCellValue.cell(row, column, dotProduct));
                     }
 
+                    // Move to the next column of the cell in copy list.
                     while (indexB < cellsB.size() && cellsB.get(indexB).column == column) {
                         indexB++;
                     }
                 }
 
+                // Move to the next row of the cell in original list.
                 while (indexA < cells.size() && cells.get(indexA).row == row) {
                     indexA++;
                 }
@@ -54,6 +57,9 @@ public class SparseMatrix extends DoubleMatrix {
         return super.times(other);
     }
 
+
+    // Finds value of the result cell with corresponding row and column.
+    // Index refers to starting index of cell in the list.
     private double getDotProduct(List<MatrixCellValue> cellsB, int row, int column, int indexA, int indexB) {
         double dotProduct = 0;
         while (indexA < cells.size() && cells.get(indexA).row == row &&
@@ -72,6 +78,7 @@ public class SparseMatrix extends DoubleMatrix {
         return dotProduct;
     }
 
+    // Helper function that creates new list with values transformed by scalar operation.
     private IDoubleMatrix scalarSparseOperation(Operation operation, double scalar) {
         List<MatrixCellValue> resultCells = new ArrayList<>();
         for (MatrixCellValue cell : cells) {
@@ -81,6 +88,9 @@ public class SparseMatrix extends DoubleMatrix {
         return new SparseMatrix(shape, resultCells);
     }
 
+
+    // Helper function that executes sparse matrix operation excluding times.
+    // Merges two lists while looking for cancelling values.
     private IDoubleMatrix sparseOperation(Operation operation, IDoubleMatrix other) {
         List<MatrixCellValue> cellsB = ((SparseMatrix) other).cells;
         List<MatrixCellValue> resultCells = new ArrayList<>();
@@ -227,10 +237,14 @@ public class SparseMatrix extends DoubleMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("SPARSE MATRIX\n");
+        sb.append(shape);
+        sb.append("row, column, value\n");
         for (MatrixCellValue cellValue : cells) {
-            sb.append(cellValue.value).append(" ");
+            sb.append(cellValue.row).append(" ");
+            sb.append(cellValue.column).append(" ");
+            sb.append(cellValue.value).append("\n");
         }
-        sb.append("\n");
         return sb.toString();
     }
 }

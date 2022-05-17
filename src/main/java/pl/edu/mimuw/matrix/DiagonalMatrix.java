@@ -5,6 +5,7 @@ import pl.edu.mimuw.operation.Multiply;
 
 public class DiagonalMatrix extends SkewedMatrix {
 
+    // line[i] corresponds to data[i][i].
     protected DiagonalMatrix(Shape shape, double[] line) {
         super(shape, line);
     }
@@ -44,6 +45,8 @@ public class DiagonalMatrix extends SkewedMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("SQUARE DIAGONAL MATRIX\n");
+        sb.append(shape);
         for (int i = 0; i < shape.rows; i++) {
             if (i >= 3) {
                 sb.append("0 ... 0 ");
@@ -55,7 +58,7 @@ public class DiagonalMatrix extends SkewedMatrix {
                 if (shape.rows - 1 - i >= 3) {
                     sb.append("0 ... 0 ");
                 } else {
-                    sb.append("0 ".repeat(i));
+                    sb.append("0 ".repeat(shape.rows - 1 - i));
                 }
             }
             sb.append("\n");

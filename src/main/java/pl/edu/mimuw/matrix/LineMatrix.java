@@ -3,6 +3,7 @@ package pl.edu.mimuw.matrix;
 import pl.edu.mimuw.operation.Operation;
 
 public abstract class LineMatrix extends DoubleMatrix {
+    // Abstract representation of matrices that can be compressed onto one dimension.
     protected final double[] line;
 
     protected LineMatrix(Shape shape, double[] line) {

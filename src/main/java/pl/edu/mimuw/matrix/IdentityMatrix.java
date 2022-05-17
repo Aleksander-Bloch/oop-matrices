@@ -57,6 +57,8 @@ public class IdentityMatrix extends DoubleMatrix {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
+        sb.append("IDENTITY MATRIX\n");
+        sb.append(shape);
         for (int i = 0; i < shape.rows; i++) {
             if (i >= 3) {
                 sb.append("0 ... 0 ");
@@ -67,7 +69,7 @@ public class IdentityMatrix extends DoubleMatrix {
             if (shape.rows - 1 - i >= 3) {
                 sb.append("0 ... 0 ");
             } else {
-                sb.append("0 ".repeat(i));
+                sb.append("0 ".repeat(shape.rows - 1 - i));
             }
             sb.append("\n");
         }
