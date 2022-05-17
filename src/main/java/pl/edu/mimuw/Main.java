@@ -5,6 +5,11 @@ import static pl.edu.mimuw.matrix.MatrixCellValue.cell;
 import static pl.edu.mimuw.matrix.Shape.matrix;
 
 // Built using IntelliJ IDE and Java 17.
+// Project Matrices
+// Provides an efficient way to represent matrices.
+// Enables executing scalar and matrix operations.
+// Supports calculating norms.
+// @author Aleksander Bloch
 public class Main {
 
   public static void main(String[] args) {
